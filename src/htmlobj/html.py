@@ -12,6 +12,7 @@ INDENT = "    "  # for codify
 class HTML:
     """Easily generate HTML.
 
+    ```python
     h = HTML()
     with h.table:
         with h.tr:
@@ -23,8 +24,12 @@ class HTML:
             h.li(f"Item {i}")
 
     print(h)
-    -> '<table><tr><td>cell 1</td>...'
-
+    ```
+    
+    Output:
+    ```
+    '<table><tr><td>cell 1</td>...'
+    ```
     """
 
     newline_default_on = set("table ol ul dl span html head body ".split())
@@ -49,7 +54,7 @@ class HTML:
 
     @classmethod
     def from_html(self, s: str) -> "HTML":
-        """Given html text, parse and return as an instance of this class
+        """Parse the given html string and return a corresponding instance of this class
 
         Params
         ------
