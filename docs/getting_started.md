@@ -31,13 +31,7 @@ See the simple_page.py example in the source code for a more detailed version of
 
 Here is another example noting a few extra points:
 
-```python
-h = HTML("html")  # can pass root tag to HTML()
-h.head.title("My Page")  # chain tags if only 1 subitem
-with h.body:  # use `with` for multiple subitems
-    h.p.u("Paragraph 1 underlined")
-    h.p.b("Paragraph 2 bold")
-```
+
 
 ## Installing
 
