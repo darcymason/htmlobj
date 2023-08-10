@@ -8,9 +8,6 @@ Python object to easily create complex html
 ```python
 from htmlobj import HTML
 
-```python
-from htmlobj import HTML
-
 h = HTML("html")
 h.head.title("My Page")  # chain tags if only 1 subitem
 with h.body:  # use `with` for multiple subitems
