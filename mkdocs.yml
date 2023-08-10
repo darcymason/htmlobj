@@ -1,0 +1,19 @@
+site_name: htmlobj Docs
+
+nav:
+  - Getting Started: getting_started.md
+  - Introduction: index.md
+  - Tutorials: tutorials.md
+  - How-To Guides: how-to-guides.md
+  - Reference: reference.md
+  - Release Notes: "release notes.md"
+
+repo_url: https://github.com/darcymason/htmlobj
+
+theme:
+    name: readthedocs
+    highlightjs: true
+
+plugins:
+  - search
+  - mkdocstrings

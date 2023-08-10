@@ -1,0 +1,28 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.4.0
+    hooks:
+    -   id: check-added-large-files
+    -   id: check-byte-order-marker
+    -   id: check-json
+    -   id: check-merge-conflict
+    -   id: check-toml
+    -   id: debug-statements
+    -   id: detect-private-key
+-   repo: local
+    hooks:
+    -   id: black
+        name: Auto formatting code with "black"
+        entry: black src tests
+        language: system
+        pass_filenames: false
+    -   id: ruff
+        name: Linting code with "ruff"
+        entry: ruff src tests
+        language: system
+        pass_filenames: false
+    -   id: pytest
+        name: Running tests with "pytest"
+        entry: pytest tests
+        language: system
+        pass_filenames: false
