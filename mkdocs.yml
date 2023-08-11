@@ -1,10 +1,8 @@
 site_name: htmlobj Docs
 
 nav:
+  - Index: index.md
   - Getting Started: getting_started.md
-  - Introduction: index.md
-  - Tutorials: tutorials.md
-  - How-To Guides: how-to-guides.md
   - Reference: reference.md
   - Release Notes: "release notes.md"
 
@@ -22,3 +20,5 @@ plugins:
           options:
             show_source: false
             show_root_heading: true
+            merge_init_into_class: true
+

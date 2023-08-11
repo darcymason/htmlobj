@@ -8,7 +8,7 @@ Using Python `with` statements to build the htmlobj objects allows you to easily
 
 Here is a brief example:
 
-```python
+``` py
 from htmlobj import HTML
 h = HTML("html")
 with h.table(border="1", style="border-collapse:collapse"):
@@ -16,9 +16,9 @@ with h.table(border="1", style="border-collapse:collapse"):
         h.td("cell 1")
         h.td("cell 2")
 h.p.u("List")
-with h.ul:
+with h.ul as mylist:  # optional `as` var name
     for i in range(3):
-        h.li(f"Item {i}")
+        mylist.li(f"Item {i}")
 print(h)  # show `str` representation
 -> '<table><tr><td>cell 1</td>...'
 ```
@@ -39,15 +39,20 @@ pip install htmlobj
 
 ## Auto-generate code
 
-If you have a web page with content similar to what you want, use `HTML.from_url` and `HTML.codify`, to *generate Python code* for you.  
+If you have a web page with content similar to what you want, you can directly create a Python file from the command line by running `htmlobj.html_parser` with `python -m`:
 
+```
+python -m htmlobj.html_parser https://example.com > my_code.py
+```
 
-```python
+Alternatively, you can do the same thing in code using `from_url` and `codify`:
+
+``` py
 h = HTML.from_url("https://example.com/")
 print(h.codify())
 ```
 
-which gives
+either method gives output like
 
 ```
 h = HTML()
@@ -59,11 +64,7 @@ with h.html:
 ...
 ```
 
-You can then copy and paste the code and edit as needed, OR you can also directly create a Python file from the command line by running `htmlobj.html_parser` with `python -m`:
-
-```
-python -m htmlobj.html_parser https://example.com > my_code.py
-```
+You can then edit the code as needed.
 
 
 ## More details
@@ -71,7 +72,7 @@ python -m htmlobj.html_parser https://example.com > my_code.py
 You may supply a tag name and some text contents when creating a HTML
 instance:
 
-```python
+``` py
 >>> h = HTML('html', 'text')
 >>> print(h)
 <html>text</html>
@@ -83,7 +84,7 @@ in the text will be escaped for HTML safety as appropriate unless
 ``escape=False`` is passed. Each of the following examples uses a new
 ``HTML`` instance:
 
-```python
+``` py
 >>> p = h.p('hello world!\\n')
 >>> p.br
 >>> p.text('more &rarr; text', escape=False)
@@ -103,7 +104,7 @@ no contents get no closing tag.
 You may turn off/on adding newlines by passing ``newlines=False`` or
 ``True`` to the tag (or ``HTML`` instance) at creation time:
 
-```python
+``` py
 >>> l = h.ol(newlines=False)
 >>> l.li('item 1')
 >>> l.li('item 2')
@@ -113,7 +114,7 @@ You may turn off/on adding newlines by passing ``newlines=False`` or
 
 Since we can't use ``class`` in Python code (it is a reserved Python keyword), the library recognises ``class_`` or ``klass`` as a substitute:
 
-```python
+``` py
 >>> print(h.p(content, class_="styled")) # or print(h.p(content, klass="styled"))
 <p class="styled">content</p>
 ```
@@ -144,7 +145,7 @@ To construct XHTML start with an instance of ``htmlobj.XHTML()`` and use it
 as you would an ``HTML`` instance. Empty elements will now be rendered
 with the appropriate XHTML minimized tag syntax. For example:
 
-```python
+``` py
 >>> from htmlobj import XHTML
 >>> h = XHTML()
 >>> h.p
@@ -160,7 +161,7 @@ Creating XML
 A slight tweak to the ``htmlobj.XHTML()`` implementation allows us to generate
 arbitrary XML using ``htmlobj.XML()``:
 
-```python
+``` py
 >>> from htmlobj import XML
 >>> h = XML('xml')
 >>> h.p
@@ -178,7 +179,7 @@ Tags with difficult names
 If your tag name isn't a valid Python identifier name, or if it's called
 "text" or "raw_text" you can add your tag slightly more manually:
 
-```python
+``` py
 >>> from htmlobj import XML
 >>> h = XML('xml')
 >>> h += XML('some-tag', 'some text')

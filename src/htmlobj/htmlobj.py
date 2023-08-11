@@ -1,9 +1,7 @@
 """Simple, elegant HTML, XHTML and XML generation.
 """
 
-import html
-
-# 2023-08: Darcy Mason:
+import html  # Python's lib
 
 
 INDENT = "    "  # for codify
@@ -25,7 +23,7 @@ class HTML:
 
     print(h)
     ```
-    
+
     Output:
     ```
     '<table><tr><td>cell 1</td>...'
@@ -33,10 +31,26 @@ class HTML:
     """
 
     newline_default_on = set("table ol ul dl span html head body ".split())
+    """html tags which use newlines by default"""
 
     def __init__(
-        self, name=None, text=None, stack=None, newlines=True, escape=True
+        self,
+        name: str | None = None,
+        text: str | None = None,
+        stack: list | None = None,
+        newlines: bool = True,
+        escape: bool = True,
     ):
+        """Create a new `HTML` instance
+
+        Args:
+            name (str | None, optional): html tag name to start with. Defaults to None.
+            text (str | None, optional): Text for inside html tag. Defaults to None.
+            stack (list | None, optional): Internal use - stack of contents. Defaults to None.
+            newlines (bool, optional): Whether to put newlines in string output. Defaults to True.
+            escape (bool, optional): Whether to 'escape' special html characters. Defaults to True.
+        """
+
         self._name = name
         self._content = []
         self._attrs = {}
@@ -53,23 +67,33 @@ class HTML:
             self.text(text, escape)
 
     @classmethod
-    def from_html(self, s: str) -> "HTML":
+    def from_html(self, html: str) -> "HTML":
         """Parse the given html string and return a corresponding instance of this class
 
-        Params
-        ------
-        s: str
-            The HTML text to create the `htmlobj.HTML` instance from
+        Args:
+            html (str): The html text to create the `htmlobj.HTML` instance from
+
+        Returns:
+            HTML: A new instance of the `HTML` class
         """
+
         from .html_parser import HtmlParser  # here to avoid circular import
 
         parser = HtmlParser()
-        parser.feed(s)
+        parser.feed(html)
         return parser.h
 
     @classmethod
-    def from_url(self, url):
-        """Parse the HTML from the given url and return instance of this class"""
+    def from_url(self, url: str) -> "HTML":
+        """Parse the HTML from the given url and return a new instance of this class
+
+        Args:
+            url (str): A web-site url as accepted by urllib
+
+        Returns:
+            HTML (HTML): a new instance of the `HTML` class
+        """
+
         import urllib.request
 
         with urllib.request.urlopen(url) as response:
@@ -79,8 +103,8 @@ class HTML:
             # print("\n".join(html.splitlines()[:40]))
         return self.from_html(html)
 
-    def __getattr__(self, name):
-        # adding a new tag or newline
+    def __getattr__(self, name: str) -> "str | HTML":
+        # Called when adding a new tag, e.g. `h.tag`, or `h.newline`
         if name == "newline":
             e = "\n"
         else:
@@ -91,16 +115,28 @@ class HTML:
             self._content.append(e)
         return e
 
-    def __iadd__(self, other):
+    def __iadd__(self, other: "str | HTML") -> "HTML":
+        """Operator for `+=`. Add content to the current HTML object
+
+        Args:
+            other (str | HTML): text, or `HTML` instance to add
+
+        Returns:
+            HTML: A reference to this instance
+        """
+
         if self._top:
             self._stack[-1]._content.append(other)
         else:
             self._content.append(other)
         return self
 
-    def text(self, text, escape=True):
-        """Add text to the document. If "escape" is True any characters
-        special to HTML will be escaped.
+    def text(self, text: str, escape: bool = True) -> "HTML":
+        """Add text to the current HTML object.
+
+        Args:
+            text (str): The text to add inside the html tag
+            escape (bool, optional): Whether to 'escape' the html for special characters. Defaults to True.
         """
         if escape:
             text = html.escape(text)
@@ -110,13 +146,28 @@ class HTML:
         else:
             self._content.append(text)
 
-    def raw_text(self, text):
-        """Add raw, unescaped text to the document. This is useful for
-        explicitly adding HTML code or entities.
+    def raw_text(self, text: str) -> "HTML":
+        """Add raw, unescaped text to the `HTML` object.
+
+        Args:
+            text (str): The text to add inside the html tag
+
+        Returns:
+            HTML: A reference to this `HTML` instance
         """
+
         return self.text(text, escape=False)
 
-    def __call__(self, *content, **kw):
+    def __call__(self, *content, **kw) -> "HTML":
+        """'Magic method' called when adding attrs in brackets e.g. h.tag(...)
+
+        Raises:
+            TypeError: if called with `read` (problem with some WSGI providers)
+
+        Returns:
+            HTML: A reference to this `HTML` instance
+        """
+
         if self._name == "read":
             if len(content) == 1 and isinstance(content[0], int):
                 raise TypeError(
@@ -131,7 +182,7 @@ class HTML:
         escape = kw.pop("escape", True)
         if content:
             if escape:
-                self._content = list(map(html.escape, content))
+                self._content = [html.escape(c) for c in content]
             else:
                 self._content = content
         if "newlines" in kw:
@@ -145,7 +196,7 @@ class HTML:
                 self._attrs[k] = html.escape(v, True) if v else v
         return self
 
-    def __enter__(self):
+    def __enter__(self) -> "HTML":
         # we're now adding tags to me!
         self._stack.append(self)
         return self
@@ -154,7 +205,7 @@ class HTML:
         # we're done adding tags to me!
         self._stack.pop()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"<HTML {self._name} 0x{id(self):x}>"
 
     def _codify_text(self, lines, indent_str, text):
@@ -216,12 +267,21 @@ class HTML:
                     self._codify_text(lines, indent_str + INDENT, c)
 
     def codify(self) -> str:
-        """Turn the HTML object into Python code to create it"""
+        """Turn the `HTML` object into Python code
+
+        Returns:
+            str: Python code to generate this `HTML` instance
+
+        Note:
+            `codify` is usually used when the HTML instance has been
+            created using `from_url` or `from_html`
+        """
+
         lines = ["h = HTML()"]
         self._codify(lines, 0)
         return "\n".join(lines)
 
-    def _stringify(self, str_type):
+    def _stringify(self, str_type) -> str:
         # turn me and my content into text
         join_chr = "\n" if self._newlines else ""
         if self._name is None:
@@ -237,11 +297,5 @@ class HTML:
             s += join_chr + f"</{self._name}>"
         return s
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self._stringify(str)
-
-    def __unicode__(self):
-        return self._stringify(unicode)
-
-    def __iter__(self):
-        return iter([str(self)])

@@ -6,4 +6,4 @@ from .htmlobj import HTML
 from .xhtml import XHTML
 from .xml import XML
 
-__version__ = "2.0.0"
+__version__ = "1.20.0"

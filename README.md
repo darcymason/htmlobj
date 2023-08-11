@@ -5,7 +5,7 @@ htmlobj
 
 ## Example:
 
-```python
+``` py
 from htmlobj import HTML
 
 h = HTML("html")
@@ -41,13 +41,13 @@ Note that the `class_` attribute has a trailing underscore because `class` is a 
 
 One added feature is creating an `htmlobj.HTML` instance from existing html, either as a string (`HTML.from_html`), or from a url (`HTML.from_url`):
 
-```python
+``` py
 h = HTML.from_url("https://example.com/")
 ```
 
 This will often be used in combination with another new feature, `HTML.codify`, to *generate Python code* using `htmlobj`, for you.  Start with a page that is similar to what you want to create, then modify as needed, e.g. to programatically fill in data for that page.
 
-```python
+``` py
 print(h.codify())
 ```
 

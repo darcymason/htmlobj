@@ -2,12 +2,25 @@ from .htmlobj import HTML
 
 
 class XHTML(HTML):
-    """Easily generate XHTML."""
+    """Easily generate XHTML. Tags in `empty_elements` are self-terminated.
+    
+    Example: 
+    ```py
+    >>> from htmlobj import XHTML
+    >>> h = XHTML()
+    >>> h.p
+    >>> h.br
+    >>> print(h)
+    <p></p>
+    <br />
+    ```
+    """
 
     empty_elements = set(
         "base meta link hr br param img area input col \
         colgroup basefont isindex frame".split()
     )
+    """Elements which can be self-closing, e.g. &lt;br /&gt;"""
 
     def _stringify(self, str_type):
         # turn me and my content into text
