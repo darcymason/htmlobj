@@ -81,5 +81,5 @@ pip install htmlobj
 
 ## Next Steps
 
-See [Getting Started](docs/getting_started.md) for more examples and detailed usage information.
+See [Getting Started](https://darcymason.github.io/htmlobj/getting_started/) for more examples and detailed usage information.
 
