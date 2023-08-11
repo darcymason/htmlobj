@@ -1,4 +1,4 @@
-from .html import HTML
+from .htmlobj import HTML
 
 
 class XHTML(HTML):

@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from htmlobj.html import HTML
+from htmlobj.htmlobj import HTML
 from htmlobj.xhtml import XHTML
 from htmlobj.xml import XML
 

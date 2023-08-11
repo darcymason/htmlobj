@@ -1,6 +1,6 @@
 """Class to parse existing html into htmlobj classes"""
 from html.parser import HTMLParser  # subclass Python's parser
-from .html import HTML  # in here to avoid circular import
+from htmlobj import HTML
 
 
 class HtmlParser(HTMLParser):
@@ -40,7 +40,6 @@ class HtmlParser(HTMLParser):
 
 if __name__ == "__main__":
     import sys
-    from .html import HTML
 
     usage = """
     python html_parser.py <source> [<lines to display>]

@@ -2,7 +2,7 @@
 
 ## Overview
 
-`htmlobj` allows you to create HTML using nothing but Python code.  It is an alternative to using templates with some other language, as used in many web frameworks.  Just create the HTML objects directly in code, and return the `str` representation to the web engine.
+`htmlobj` allows you to create HTML using nothing but Python code.  It is an alternative to using templates, as used in many web frameworks, which usually have their own non-Python language.  With `htmlobj`, you can just create the HTML objects directly in code, and return the `str` representation to the web engine.
 
 Using Python `with` statements to build the htmlobj objects allows you to easily see the HTML structure, and add in any Python code you need. When complete, the `str` value of the object will return HTML text.
 
@@ -10,7 +10,7 @@ Here is a brief example:
 
 ```python
 from htmlobj import HTML
-h = HTML()
+h = HTML("html")
 with h.table(border="1", style="border-collapse:collapse"):
     with h.tr:
         h.td("cell 1")
@@ -19,7 +19,7 @@ h.p.u("List")
 with h.ul:
     for i in range(3):
         h.li(f"Item {i}")
-print(h)
+print(h)  # show `str` representation
 -> '<table><tr><td>cell 1</td>...'
 ```
 
@@ -35,27 +35,41 @@ Here is another example noting a few extra points:
 
 ## Installing
 
-Install `htmlobj` using `pip`:
 
 ```
 pip install htmlobj
 ```
 
-Constructing your HTML
-----------------------
+## Auto-generate code
 
-To construct HTML start with an instance of ``htmlobj.HTML()``. Add
-tags by accessing the tag's attribute on that object. 
+If you have a web page with content similar to what you want, use `HTML.from_url` and `HTML.codify`, to *generate Python code* for you.  
 
-For example:
 
 ```python
->>> from htmlobj import HTML
->>> h = HTML()
->>> h.p('Hello, world!')
->>> print(h)
-<p>Hello, world!</p>
+h = HTML.from_url("https://example.com/")
+print(h.codify())
 ```
+
+which gives
+
+```
+h = HTML()
+with h.html:
+    with h.head:
+        h.title("Example Domain")
+        h.meta(charset="utf-8")
+        h.meta(http-equiv="Content-type", content="text/html; charset=utf-8")
+...
+```
+
+You can then copy and paste the code and edit as needed, OR you can also directly create a Python file from the command line by running `htmlobj.html_parser` with `python -m`:
+
+```
+python -m htmlobj.html_parser https://example.com > my_code.py
+```
+
+
+## More details
 
 You may supply a tag name and some text contents when creating a HTML
 instance:
@@ -83,17 +97,11 @@ in the text will be escaped for HTML safety as appropriate unless
 <p>
 ```
 
-Note also that the top-level ``HTML`` object adds newlines between tags by
+Note: You can also use `raw_text` as a shortcut for `text('text', escape=False)`.
+
+The top-level ``HTML`` object adds newlines between tags by
 default. Finally in the above you'll see an empty paragraph tag - tags with
 no contents get no closing tag.
-
-If the tag should have sub-tags, use a `with` context:
-
-```python
->>> with h.ol as l:
-...   l.li('item 1')
-...   l.li.b('item 2 > 1')
-```
 
 You may turn off/on adding newlines by passing ``newlines=False`` or
 ``True`` to the tag (or ``HTML`` instance) at creation time:
@@ -106,11 +114,10 @@ You may turn off/on adding newlines by passing ``newlines=False`` or
 <ol><li>item 1</li><li>item 2</li></ol>
 ```
 
-Since we can't use ``class`` as a keyword, the library recognises ``klass``
-or ``class_`` as a substitute:
+Since we can't use ``class`` as a keyword, the library recognises ``class_`` or ``klass`` as a substitute:
 
 ```python
->>> print(h.p(content, klass="styled")) # or print(h.p(content, class_="styled"))
+>>> print(h.p(content, class_="styled")) # or print(h.p(content, klass="styled"))
 <p class="styled">content</p>
 ```
 
