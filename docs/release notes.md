@@ -1,10 +1,11 @@
 # Release Notes
 
-## v2.0
+## v1.20.0
 
-* Added ability to handle 'blank' attrs like 'nowrap' using e.g. `nowrap=None` attribute.
 * Added `HTML.from_html` and `HTML.from_url` methods to create an `HTML` instance from an existing HTML source
 * Added HTML.codify method to produce Python code from an `HTML` instance. In combination with one of the `HTML.from_` methods, can make Python code to reproduce existing HTML similar to what you need.
+* Added ability to handle 'blank' attrs like 'nowrap' using e.g. `nowrap=None` attribute.
+* Added `class_` as alternative to `klass` in avoiding Python's `class` keyword
 
 
 ## Release notes from `html3` and `html` libaries

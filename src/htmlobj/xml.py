@@ -2,9 +2,20 @@ from .xhtml import XHTML
 
 
 class XML(XHTML):
-    """Easily generate XML.
+    """Easily generate XML. All tags with no contents are reduced to self-terminating tags.
 
-    All tags with no contents are reduced to self-terminating tags.
+    Example:
+    ``` py
+    >>> from htmlobj import XML
+    >>> h = XML('xml')
+    >>> h.p
+    >>> h.br('hi there')
+    >>> print(h)
+    <xml>
+    <p />
+    <br>hi there</br>
+    </xml>
+    ```
     """
 
     newline_default_on = set()  # no tags are special
