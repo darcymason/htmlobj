@@ -8,7 +8,7 @@ build-backend = "flit_core.buildapi"
 name = "htmlobj"
 readme = "README.md"
 license = { file = "LICENSE" }
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dynamic = ["version", "description"]
 
 authors = [
@@ -19,8 +19,6 @@ authors = [
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Developers",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3 :: Only",
     "License :: OSI Approved :: BSD License",
