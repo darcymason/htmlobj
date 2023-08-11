@@ -27,10 +27,7 @@ When rendered in a browser, the result will look something like:
 
 ![Simple output](img/simple_ex.png)
 
-See the simple_page.py example in the source code for a more detailed version of the above, with more complex cell contents, links, and more attributes like CSS class and styles added.
-
-Here is another example noting a few extra points:
-
+Not the prettiest web page, but of course you can add CSS, `class_` and other attributes to style the output.  See the simple_page.py example in the source code for a more complex version of the above, including links, CSS classes and styles.
 
 
 ## Installing
@@ -114,7 +111,7 @@ You may turn off/on adding newlines by passing ``newlines=False`` or
 <ol><li>item 1</li><li>item 2</li></ol>
 ```
 
-Since we can't use ``class`` as a keyword, the library recognises ``class_`` or ``klass`` as a substitute:
+Since we can't use ``class`` in Python code (it is a reserved Python keyword), the library recognises ``class_`` or ``klass`` as a substitute:
 
 ```python
 >>> print(h.p(content, class_="styled")) # or print(h.p(content, klass="styled"))
