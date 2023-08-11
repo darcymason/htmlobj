@@ -16,9 +16,9 @@ with h.table(border="1", style="border-collapse:collapse"):
         h.td("cell 1")
         h.td("cell 2")
 h.p.u("List")
-with h.ul:
+with h.ul as mylist:  # optional `as` var name
     for i in range(3):
-        h.li(f"Item {i}")
+        mylist.li(f"Item {i}")
 print(h)  # show `str` representation
 -> '<table><tr><td>cell 1</td>...'
 ```
@@ -39,15 +39,20 @@ pip install htmlobj
 
 ## Auto-generate code
 
-If you have a web page with content similar to what you want, use `HTML.from_url` and `HTML.codify`, to *generate Python code* for you.  
+If you have a web page with content similar to what you want, you can directly create a Python file from the command line by running `htmlobj.html_parser` with `python -m`:
 
+```
+python -m htmlobj.html_parser https://example.com > my_code.py
+```
+
+Alternatively, you can do the same thing in code using `from_url` and `codify`:
 
 ```python
 h = HTML.from_url("https://example.com/")
 print(h.codify())
 ```
 
-which gives
+either method gives output like
 
 ```
 h = HTML()
@@ -59,11 +64,7 @@ with h.html:
 ...
 ```
 
-You can then copy and paste the code and edit as needed, OR you can also directly create a Python file from the command line by running `htmlobj.html_parser` with `python -m`:
-
-```
-python -m htmlobj.html_parser https://example.com > my_code.py
-```
+You can then edit the code as needed.
 
 
 ## More details
