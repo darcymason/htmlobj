@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Reference - htmlobj Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Reference";
+        var mkdocs_page_input_path = "reference.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> htmlobj Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Index</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Reference</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#htmlobj.HTML">HTML</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#htmlobj.htmlobj.HTML.newline_default_on">newline_default_on</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#htmlobj.htmlobj.HTML.__call__">__call__()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#htmlobj.htmlobj.HTML.__iadd__">__iadd__()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#htmlobj.htmlobj.HTML.codify">codify()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#htmlobj.htmlobj.HTML.from_html">from_html()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#htmlobj.htmlobj.HTML.from_url">from_url()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#htmlobj.htmlobj.HTML.raw_text">raw_text()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#htmlobj.htmlobj.HTML.text">text()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#htmlobj.XHTML">XHTML</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#htmlobj.xhtml.XHTML.empty_elements">empty_elements</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#htmlobj.XML">XML</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../release%20notes/">Release Notes</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">htmlobj Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li class="breadcrumb-item active">Reference</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/darcymason/htmlobj/edit/master/docs/reference.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="reference">Reference</h1>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmlobj.HTML" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">htmlobj</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stack</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents first">
+
+  
+      <p>Easily generate HTML.</p>
+<pre><code class="language-python">h = HTML()
+with h.table:
+    with h.tr:
+        h.td(&quot;cell 1&quot;)
+        h.td(&quot;cell 2&quot;)
+h.p.u(&quot;List&quot;)
+with h.ul:
+    for i in range(3):
+        h.li(f&quot;Item {i}&quot;)
+
+print(h)
+</code></pre>
+<p>Output:</p>
+<pre><code>'&lt;table&gt;&lt;tr&gt;&lt;td&gt;cell 1&lt;/td&gt;...'
+</code></pre>
+
+  
+      <p>Create a new <code>HTML</code> instance</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b>name</b>
+                  (<code>str | None</code>)
+              –
+              <div class="doc-md-description">
+                <p>html tag name to start with. Defaults to None.</p>
+              </div>
+            </li>
+            <li>
+              <b>text</b>
+                  (<code>str | None</code>)
+              –
+              <div class="doc-md-description">
+                <p>Text for inside html tag. Defaults to None.</p>
+              </div>
+            </li>
+            <li>
+              <b>stack</b>
+                  (<code>list | None</code>)
+              –
+              <div class="doc-md-description">
+                <p>Internal use - stack of contents. Defaults to None.</p>
+              </div>
+            </li>
+            <li>
+              <b>newlines</b>
+                  (<code>bool</code>)
+              –
+              <div class="doc-md-description">
+                <p>Whether to put newlines in string output. Defaults to True.</p>
+              </div>
+            </li>
+            <li>
+              <b>escape</b>
+                  (<code>bool</code>)
+              –
+              <div class="doc-md-description">
+                <p>Whether to 'escape' special html characters. Defaults to True.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="htmlobj.htmlobj.HTML.newline_default_on" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">newline_default_on</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;table ol ul dl span html head body &#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>html tags which use newlines by default</p>
+  </div>
+
+</div>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="htmlobj.htmlobj.HTML.__call__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__call__</span><span class="p">(</span><span class="o">*</span><span class="n">content</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>'Magic method' called when adding attrs in brackets e.g. h.tag(...)</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code>TypeError</code>
+              –
+              <div class="doc-md-description">
+                <p>if called with <code>read</code> (problem with some WSGI providers)</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b>HTML</b>(                <code><a class="autorefs autorefs-internal" title="htmlobj.htmlobj.HTML" href="#htmlobj.HTML">HTML</a></code>
+)            –
+            <div class="doc-md-description">
+              <p>A reference to this <code>HTML</code> instance</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="htmlobj.htmlobj.HTML.__iadd__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__iadd__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Operator for <code>+=</code>. Add content to the current HTML object</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b>other</b>
+                  (<code>str | <a class="autorefs autorefs-internal" title="htmlobj.htmlobj.HTML" href="#htmlobj.HTML">HTML</a></code>)
+              –
+              <div class="doc-md-description">
+                <p>text, or <code>HTML</code> instance to add</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b>HTML</b>(                <code><a class="autorefs autorefs-internal" title="htmlobj.htmlobj.HTML" href="#htmlobj.HTML">HTML</a></code>
+)            –
+            <div class="doc-md-description">
+              <p>A reference to this instance</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="htmlobj.htmlobj.HTML.codify" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">codify</span><span class="p">()</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Turn the <code>HTML</code> object into Python code</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b>str</b>(                <code>str</code>
+)            –
+            <div class="doc-md-description">
+              <p>Python code to generate this <code>HTML</code> instance</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+<details class="note" open>
+  <summary>Note</summary>
+  <p><code>codify</code> is usually used when the HTML instance has been
+created using <code>from_url</code> or <code>from_html</code></p>
+</details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="htmlobj.htmlobj.HTML.from_html" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">from_html</span><span class="p">(</span><span class="n">html</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Parse the given html string and return a corresponding instance of this class</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b>html</b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The html text to create the <code>htmlobj.HTML</code> instance from</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b>HTML</b>(                <code><a class="autorefs autorefs-internal" title="htmlobj.htmlobj.HTML" href="#htmlobj.HTML">HTML</a></code>
+)            –
+            <div class="doc-md-description">
+              <p>A new instance of the <code>HTML</code> class</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="htmlobj.htmlobj.HTML.from_url" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">from_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Parse the HTML from the given url and return a new instance of this class</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b>url</b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>A web-site url as accepted by urllib</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b>HTML</b>(                <code><a class="autorefs autorefs-internal" title="htmlobj.htmlobj.HTML" href="#htmlobj.HTML">HTML</a></code>
+)            –
+            <div class="doc-md-description">
+              <p>a new instance of the <code>HTML</code> class</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="htmlobj.htmlobj.HTML.raw_text" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">raw_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Add raw, unescaped text to the <code>HTML</code> object.</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b>text</b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The text to add inside the html tag</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b>HTML</b>(                <code><a class="autorefs autorefs-internal" title="htmlobj.htmlobj.HTML" href="#htmlobj.HTML">HTML</a></code>
+)            –
+            <div class="doc-md-description">
+              <p>A reference to this <code>HTML</code> instance</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="htmlobj.htmlobj.HTML.text" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Add text to the current HTML object.</p>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b>text</b>
+                  (<code>str</code>)
+              –
+              <div class="doc-md-description">
+                <p>The text to add inside the html tag</p>
+              </div>
+            </li>
+            <li>
+              <b>escape</b>
+                  (<code>bool</code>)
+              –
+              <div class="doc-md-description">
+                <p>Whether to 'escape' the html for special characters. Defaults to True.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmlobj.XHTML" class="doc doc-heading">
+        <code>htmlobj.XHTML</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents first">
+      <p class="doc doc-class-bases">
+        Bases: <code><a class="autorefs autorefs-internal" title="htmlobj.htmlobj.HTML" href="#htmlobj.HTML">HTML</a></code></p>
+
+  
+      <p>Easily generate XHTML. Tags in <code>empty_elements</code> are self-terminated.</p>
+<p>Example: </p>
+<pre><code class="language-py">&gt;&gt;&gt; from htmlobj import XHTML
+&gt;&gt;&gt; h = XHTML()
+&gt;&gt;&gt; h.p
+&gt;&gt;&gt; h.br
+&gt;&gt;&gt; print(h)
+&lt;p&gt;&lt;/p&gt;
+&lt;br /&gt;
+</code></pre>
+
+
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="htmlobj.xhtml.XHTML.empty_elements" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">empty_elements</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;base meta link hr br param img area input col         colgroup basefont isindex frame&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Elements which can be self-closing, e.g. &lt;br /&gt;</p>
+  </div>
+
+</div>
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="htmlobj.XML" class="doc doc-heading">
+        <code>htmlobj.XML</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents first">
+      <p class="doc doc-class-bases">
+        Bases: <code><a class="autorefs autorefs-internal" title="htmlobj.xhtml.XHTML" href="#htmlobj.XHTML">XHTML</a></code></p>
+
+  
+      <p>Easily generate XML. All tags with no contents are reduced to self-terminating tags.</p>
+<p>Example:</p>
+<pre><code class="language-py">&gt;&gt;&gt; from htmlobj import XML
+&gt;&gt;&gt; h = XML('xml')
+&gt;&gt;&gt; h.p
+&gt;&gt;&gt; h.br('hi there')
+&gt;&gt;&gt; print(h)
+&lt;xml&gt;
+&lt;p /&gt;
+&lt;br&gt;hi there&lt;/br&gt;
+&lt;/xml&gt;
+</code></pre>
+
+
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../getting_started/" class="btn btn-neutral float-left" title="Getting Started"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../release%20notes/" class="btn btn-neutral float-right" title="Release Notes">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/darcymason/htmlobj" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../getting_started/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../release%20notes/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Getting Started - htmlobj Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Getting Started";
+        var mkdocs_page_input_path = "getting_started.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> htmlobj Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Index</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Getting Started</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#installing">Installing</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#auto-generate-code">Auto-generate code</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#more-details">More details</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-generation-works">How generation works</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#creating-xhtml">Creating XHTML</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#creating-xml">Creating XML</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tags-with-difficult-names">Tags with difficult names</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../reference/">Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../release%20notes/">Release Notes</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">htmlobj Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li class="breadcrumb-item active">Getting Started</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/darcymason/htmlobj/edit/master/docs/getting_started.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="getting-started">Getting Started</h1>
+<h2 id="overview">Overview</h2>
+<p><code>htmlobj</code> allows you to create HTML using nothing but Python code.  It is an alternative to using templates, as used in many web frameworks, which usually have their own non-Python language.  With <code>htmlobj</code>, you can just create the HTML objects directly in code, and return the <code>str</code> representation to the web engine.</p>
+<p>Using Python <code>with</code> statements to build the htmlobj objects allows you to easily see the HTML structure, and add in any Python code you need. When complete, the <code>str</code> value of the object will return HTML text.</p>
+<p>Here is a brief example:</p>
+<pre><code class="language-py">from htmlobj import HTML
+h = HTML(&quot;html&quot;)
+with h.table(border=&quot;1&quot;, style=&quot;border-collapse:collapse&quot;):
+    with h.tr:
+        h.td(&quot;cell 1&quot;)
+        h.td(&quot;cell 2&quot;)
+h.p.u(&quot;List&quot;)
+with h.ul as mylist:  # optional `as` var name
+    for i in range(3):
+        mylist.li(f&quot;Item {i}&quot;)
+print(h)  # show `str` representation
+-&gt; '&lt;table&gt;&lt;tr&gt;&lt;td&gt;cell 1&lt;/td&gt;...'
+</code></pre>
+<p>When rendered in a browser, the result will look something like:</p>
+<p><img alt="Simple output" src="../img/simple_ex.png" /></p>
+<p>Not the prettiest web page, but of course you can add CSS, <code>class_</code> and other attributes to style the output.  See the simple_page.py example in the source code for a more complex version of the above, including links, CSS classes and styles.</p>
+<h2 id="installing">Installing</h2>
+<pre><code>pip install htmlobj
+</code></pre>
+<h2 id="auto-generate-code">Auto-generate code</h2>
+<p>If you have a web page with content similar to what you want, you can directly create a Python file from the command line by running <code>htmlobj.html_parser</code> with <code>python -m</code>:</p>
+<pre><code>python -m htmlobj.html_parser https://example.com &gt; my_code.py
+</code></pre>
+<p>Alternatively, you can do the same thing in code using <code>from_url</code> and <code>codify</code>:</p>
+<pre><code class="language-py">h = HTML.from_url(&quot;https://example.com/&quot;)
+print(h.codify())
+</code></pre>
+<p>either method gives output like</p>
+<pre><code>h = HTML()
+with h.html:
+    with h.head:
+        h.title(&quot;Example Domain&quot;)
+        h.meta(charset=&quot;utf-8&quot;)
+        h.meta(http-equiv=&quot;Content-type&quot;, content=&quot;text/html; charset=utf-8&quot;)
+...
+</code></pre>
+<p>You can then edit the code as needed.</p>
+<h2 id="more-details">More details</h2>
+<p>You may supply a tag name and some text contents when creating a HTML
+instance:</p>
+<pre><code class="language-py">&gt;&gt;&gt; h = HTML('html', 'text')
+&gt;&gt;&gt; print(h)
+&lt;html&gt;text&lt;/html&gt;
+</code></pre>
+<p>You may also append text content later using the tag's <code>.text()</code> method
+or using augmented addition <code>+=</code>. Any HTML-specific characters (<code>&lt;&gt;&amp;"</code>)
+in the text will be escaped for HTML safety as appropriate unless
+<code>escape=False</code> is passed. Each of the following examples uses a new
+<code>HTML</code> instance:</p>
+<pre><code class="language-py">&gt;&gt;&gt; p = h.p('hello world!\\n')
+&gt;&gt;&gt; p.br
+&gt;&gt;&gt; p.text('more &amp;rarr; text', escape=False)
+&gt;&gt;&gt; p += ' ... augmented'
+&gt;&gt;&gt; h.p
+&gt;&gt;&gt; print(h)
+&lt;p&gt;hello, world!&lt;br&gt;more &amp;rarr; text ... augmented&lt;/p&gt;
+&lt;p&gt;
+</code></pre>
+<p>Note: You can also use <code>raw_text</code> as a shortcut for <code>text('text', escape=False)</code>.</p>
+<p>The top-level <code>HTML</code> object adds newlines between tags by
+default. Finally in the above you'll see an empty paragraph tag - tags with
+no contents get no closing tag.</p>
+<p>You may turn off/on adding newlines by passing <code>newlines=False</code> or
+<code>True</code> to the tag (or <code>HTML</code> instance) at creation time:</p>
+<pre><code class="language-py">&gt;&gt;&gt; l = h.ol(newlines=False)
+&gt;&gt;&gt; l.li('item 1')
+&gt;&gt;&gt; l.li('item 2')
+&gt;&gt;&gt; print(h)
+&lt;ol&gt;&lt;li&gt;item 1&lt;/li&gt;&lt;li&gt;item 2&lt;/li&gt;&lt;/ol&gt;
+</code></pre>
+<p>Since we can't use <code>class</code> in Python code (it is a reserved Python keyword), the library recognises <code>class_</code> or <code>klass</code> as a substitute:</p>
+<pre><code class="language-py">&gt;&gt;&gt; print(h.p(content, class_=&quot;styled&quot;)) # or print(h.p(content, klass=&quot;styled&quot;))
+&lt;p class=&quot;styled&quot;&gt;content&lt;/p&gt;
+</code></pre>
+<h2 id="how-generation-works">How generation works</h2>
+<p>The HTML document is generated when the <code>HTML</code> instance is "stringified".
+This could be done either by invoking <code>str()</code> on it, or just printing it.
+It may also be returned directly as the "iterable content" from a WSGI app
+function.</p>
+<p>You may also render any tag or sub-tag at any time by stringifying it.</p>
+<p>Tags with no contents (either text or sub-tags) will have no closing tag.
+There is no "special list" of tags that must always have closing tags, so
+if you need to force a closing tag you'll need to provide some content,
+even if it's just a single space character.</p>
+<p>Rendering doesn't affect the HTML document's state, so you can add to or
+otherwise manipulate the HTML after you've stringified it.</p>
+<h2 id="creating-xhtml">Creating XHTML</h2>
+<p>To construct XHTML start with an instance of <code>htmlobj.XHTML()</code> and use it
+as you would an <code>HTML</code> instance. Empty elements will now be rendered
+with the appropriate XHTML minimized tag syntax. For example:</p>
+<pre><code class="language-py">&gt;&gt;&gt; from htmlobj import XHTML
+&gt;&gt;&gt; h = XHTML()
+&gt;&gt;&gt; h.p
+&gt;&gt;&gt; h.br
+&gt;&gt;&gt; print(h)
+&lt;p&gt;&lt;/p&gt;
+&lt;br /&gt;
+</code></pre>
+<h2 id="creating-xml">Creating XML</h2>
+<p>A slight tweak to the <code>htmlobj.XHTML()</code> implementation allows us to generate
+arbitrary XML using <code>htmlobj.XML()</code>:</p>
+<pre><code class="language-py">&gt;&gt;&gt; from htmlobj import XML
+&gt;&gt;&gt; h = XML('xml')
+&gt;&gt;&gt; h.p
+&gt;&gt;&gt; h.br('hi there')
+&gt;&gt;&gt; print(h)
+&lt;xml&gt;
+&lt;p /&gt;
+&lt;br&gt;hi there&lt;/br&gt;
+&lt;/xml&gt;
+</code></pre>
+<h2 id="tags-with-difficult-names">Tags with difficult names</h2>
+<p>If your tag name isn't a valid Python identifier name, or if it's called
+"text" or "raw_text" you can add your tag slightly more manually:</p>
+<pre><code class="language-py">&gt;&gt;&gt; from htmlobj import XML
+&gt;&gt;&gt; h = XML('xml')
+&gt;&gt;&gt; h += XML('some-tag', 'some text')
+&gt;&gt;&gt; h += XML('text', 'some text')
+&gt;&gt;&gt; print(h)
+&lt;xml&gt;
+&lt;some-tag&gt;some text&lt;/some-tag&gt;
+&lt;text&gt;some text&lt;/text&gt;
+&lt;/xml&gt;
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Index"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../reference/" class="btn btn-neutral float-right" title="Reference">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/darcymason/htmlobj" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../reference/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
