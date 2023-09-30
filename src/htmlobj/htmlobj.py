@@ -1,7 +1,8 @@
 """Simple, elegant HTML, XHTML and XML generation.
 """
 
-import html  # Python's lib
+import html
+from keyword import iskeyword  # Python's lib
 
 
 INDENT = "    "  # for codify
@@ -188,12 +189,13 @@ class HTML:
         if "newlines" in kw:
             # special-case to allow control over newlines
             self._newlines = kw.pop("newlines")
-        for k in kw:
-            if k == "klass" or k == "class_":
-                self._attrs["class"] = html.escape(kw[k], True)
-            else:
-                v = kw[k]
-                self._attrs[k] = html.escape(v, True) if v else v
+        for k,v in kw.items():
+            if k.endswith("_") and iskeyword(k):
+                k = k[:-1]
+            elif k == "klass":
+                k = "class"
+            self._attrs[k] = html.escape(v, True) if v else v
+        
         return self
 
     def __enter__(self) -> "HTML":
