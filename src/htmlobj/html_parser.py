@@ -6,7 +6,7 @@ from htmlobj import HTML
 class HtmlParser(HTMLParser):
     """Parse html into htmlobj.HTML classes"""
 
-    start_tag_only = ["input", "br", "img", "option"]
+    start_tag_only = ["input", "br", "img", "option", "link"]
 
     def __init__(self, convert_charrefs=False):
         self.h = HTML()
@@ -36,6 +36,9 @@ class HtmlParser(HTMLParser):
     def handle_endtag(self, tag):
         if tag not in self.start_tag_only:
             self.h.__exit__(None, None, None)
+
+    def handle_comment(self, data: str) -> None:
+        return super().handle_comment(data)
 
 
 if __name__ == "__main__":
