@@ -190,7 +190,7 @@ class HTML:
             # special-case to allow control over newlines
             self._newlines = kw.pop("newlines")
         for k,v in kw.items():
-            if k.endswith("_") and iskeyword(k):
+            if k.endswith("_") and iskeyword(k[:-1]):
                 k = k[:-1]
             elif k == "klass":
                 k = "class"
@@ -301,3 +301,9 @@ class HTML:
 
     def __str__(self) -> str:
         return self._stringify(str)
+
+
+if __name__ == "__main__":
+    h = HTML()
+    h.td(class_="testclass")
+    print(h)
