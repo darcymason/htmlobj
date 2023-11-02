@@ -159,7 +159,7 @@ class HTML:
 
         return self.text(text, escape=False)
 
-    def __call__(self, *content, **kw) -> "HTML":
+    def __call__(self, *args, **kwargs) -> "HTML":
         """'Magic method' called when adding attrs in brackets e.g. h.tag(...)
 
         Raises:
@@ -170,31 +170,31 @@ class HTML:
         """
 
         if self._name == "read":
-            if len(content) == 1 and isinstance(content[0], int):
+            if len(args) == 1 and isinstance(args[0], int):
                 raise TypeError(
-                    f"you appear to be calling read({content}) on a HTML instance"
+                    f"you appear to be calling read({args}) on a HTML instance"
                 )
-            elif len(content) == 0:
+            elif len(args) == 0:
                 raise TypeError(
                     "you appear to be calling read() on a HTML instance"
                 )
 
         # customising a tag with content or attributes
-        escape = kw.pop("escape", True)
-        if content:
+        escape = kwargs.pop("escape", True)
+        if args:
             if escape:
-                self._content = [html.escape(c) for c in content]
+                self._content = [html.escape(c) for c in args]
             else:
-                self._content = content
-        if "newlines" in kw:
+                self._content = args
+        if "newlines" in kwargs:
             # special-case to allow control over newlines
-            self._newlines = kw.pop("newlines")
-        for k,v in kw.items():
+            self._newlines = kwargs.pop("newlines")
+        for k,v in kwargs.items():
             if k.endswith("_") and iskeyword(k[:-1]):
                 k = k[:-1]
             elif k == "klass":
                 k = "class"
-            self._attrs[k] = html.escape(v, True) if v else v
+            self._attrs[k] = html.escape(v, True) if v and escape else v
         
         return self
 
