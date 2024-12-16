@@ -99,7 +99,7 @@ class HTML:
 
         with urllib.request.urlopen(url) as response:
             html = response.read().decode(
-                response.headers.get_content_charset()
+                response.headers.get_content_charset() or "utf8"
             )
             # print("\n".join(html.splitlines()[:40]))
         return self.from_html(html)
@@ -301,9 +301,3 @@ class HTML:
 
     def __str__(self) -> str:
         return self._stringify(str)
-
-
-if __name__ == "__main__":
-    h = HTML()
-    h.td(class_="testclass")
-    print(h)

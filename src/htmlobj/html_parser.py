@@ -2,6 +2,7 @@
 from html.parser import HTMLParser  # subclass Python's parser
 from htmlobj import HTML
 
+import sys
 
 class HtmlParser(HTMLParser):
     """Parse html into htmlobj.HTML classes"""
@@ -41,9 +42,7 @@ class HtmlParser(HTMLParser):
         return super().handle_comment(data)
 
 
-if __name__ == "__main__":
-    import sys
-
+def main(args):
     usage = """
     python html_parser.py <source> [<lines to display>]
 
@@ -57,13 +56,13 @@ if __name__ == "__main__":
     i.e. it is Python code using htmlobj to re-create the HTML
     """
 
-    num_args = len(sys.argv)
+    num_args = len(args)
     if not 2 <= num_args <= 3:
         print(usage)
         sys.exit(-1)
 
     if num_args > 1:
-        param = sys.argv[1]
+        param = args[1]
         if param.startswith(("http", "file")):
             h = HTML.from_url(param)
         else:
@@ -73,6 +72,10 @@ if __name__ == "__main__":
     code_lines = code.splitlines()
     lines_to_display = len(code_lines)  # show all by default
     if num_args > 2:
-        lines_to_display = int(sys.argv[2])
+        lines_to_display = int(args[2])
 
-    print("\n".join(code_lines[:lines_to_display]))
+    return "\n".join(code_lines[:lines_to_display])
+
+
+if __name__ == "__main__":
+    print(main(sys.argv))
