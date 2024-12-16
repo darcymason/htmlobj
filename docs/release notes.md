@@ -1,5 +1,13 @@
 # Release Notes
 
+## v1.30.0
+
+* Fixed bug in Python keyword check
+* Added py.typed
+* Fixed bug in attribute values if `escape` False
+* Increased test coverage
+
+
 ## v1.20.0
 
 * Added `HTML.from_html` and `HTML.from_url` methods to create an `HTML` instance from an existing HTML source
