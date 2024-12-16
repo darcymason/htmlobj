@@ -64,7 +64,7 @@ if __name__ == "__main__":
 
     if num_args > 1:
         param = sys.argv[1]
-        if param.startswith("http"):
+        if param.startswith(("http", "file")):
             h = HTML.from_url(param)
         else:
             h = HTML.from_html(param)

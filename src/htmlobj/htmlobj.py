@@ -236,7 +236,7 @@ class HTML:
                     self._codify_text(lines, indent_str, c)
             return
         attr_strs = [
-            f'{key if key != "class" else "class_"}="{val}"'
+            f'{key if not iskeyword(key) else key+"_"}="{val}"'
             if val is not None
             else f"{key}=None"
             for key, val in self._attrs.items()
